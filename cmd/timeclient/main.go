@@ -50,7 +50,7 @@ func main() {
 	}
 
 	hostport := fmt.Sprintf("%s:%d", host, port)
-	log.Printf("calling %s for time info", hostport)
+	//	log.Printf("calling %s for time info", hostport)
 	conn, err := net.Dial("tcp", hostport)
 	if err != nil {
 		log.Println("failed calling Time server: " + err.Error())
