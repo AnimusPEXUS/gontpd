@@ -8,7 +8,6 @@ import (
 	"net"
 	"os"
 	"strconv"
-	"time"
 
 	"github.com/AnimusPEXUS/gontpd"
 )
@@ -70,8 +69,8 @@ func main() {
 
 	fmt.Println(res)
 
-	t := time.Unix(res, 0)
-	t = t.UTC()
-	fmt.Println(t.String())
+	//	t := time.Unix(res, 0)
+	//	t = t.UTC()
+	//	fmt.Println(t.String())
 
 }
