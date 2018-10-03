@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"strconv"
 	"time"
 )
 
@@ -87,15 +88,17 @@ func (self *Server) Start() {
 
 func (self *Server) handleConn(conn net.Conn) {
 
-	log.Println("info", "new connection from client "+conn.RemoteAddr().String())
-
 	now := int32(time.Now().UTC().Unix())
+	now_s := strconv.Itoa(int(now))
 
-	err := binary.Write(conn, binary.BigEndian, int32(UnixToRfc(int64(now))))
+	log.Println("info", now_s, "new connection from client "+conn.RemoteAddr().String())
+
+	err := binary.Write(conn, binary.BigEndian, int32(Rfc868ToUnix(int64(now))))
 	if err != nil {
 		go self.sigHandleError(err)
 		log.Println(
 			"error",
+			now_s,
 			"client "+conn.RemoteAddr().String(),
 			"can't write response data",
 			err,
@@ -107,11 +110,12 @@ func (self *Server) handleConn(conn net.Conn) {
 		go self.sigHandleError(err)
 		log.Println(
 			"error",
+			now_s,
 			"client "+conn.RemoteAddr().String(),
 			"can't close connection",
 			err,
 		)
 	}
 
-	log.Println("info", "responce written. connection closed")
+	log.Println("info", now_s, "responce written. connection closed")
 }
