@@ -34,11 +34,13 @@ func main() {
 	s, err := gotimed.NewServer(port)
 	if err != nil {
 		log.Println("error", "Error instantiating Time server:", err)
+		os.Exit(11)
 	}
 
 	err = s.Run()
 	if err != nil {
 		log.Println("error", "Time server exiting with error:", err)
+		os.Exit(12)
 	}
 
 }
