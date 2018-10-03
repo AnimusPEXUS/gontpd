@@ -4,13 +4,25 @@ import (
 	"encoding/binary"
 	"flag"
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/AnimusPEXUS/gotimed"
 )
+
+func Log(txt string, out *os.File) {
+	out.Write([]byte(time.Now().UTC().String() + " " + txt + "\n"))
+}
+
+func LogError(txt string) {
+	Log(txt, os.Stderr)
+}
+
+//func LogInfo(txt string) {
+//	Log(txt, os.Stdout)
+//}
 
 func main() {
 	var (
@@ -23,7 +35,7 @@ func main() {
 
 		err := fs.Parse(os.Args[1:])
 		if err != nil {
-			fmt.Println("error", err)
+			LogError("error: " + err.Error())
 			os.Exit(10)
 		}
 
@@ -31,7 +43,7 @@ func main() {
 		len_args := len(fs_args)
 
 		if len_args > 2 {
-			fmt.Println("error", "too many arguments")
+			LogError("error: too many arguments")
 			os.Exit(12)
 		}
 
@@ -42,7 +54,7 @@ func main() {
 		if len_args > 1 {
 			port, err = strconv.Atoi(fs_args[1])
 			if err != nil {
-				fmt.Println("error", "invalid value for port argument")
+				LogError("error: invalid value for port argument")
 				os.Exit(13)
 			}
 		}
@@ -53,7 +65,7 @@ func main() {
 	//	log.Printf("calling %s for time info", hostport)
 	conn, err := net.Dial("tcp", hostport)
 	if err != nil {
-		log.Println("failed calling Time server: " + err.Error())
+		LogError("failed calling Time server: " + err.Error())
 		os.Exit(10)
 	}
 
@@ -61,7 +73,7 @@ func main() {
 
 	err = binary.Read(conn, binary.BigEndian, &val)
 	if err != nil {
-		log.Println("failed reading Time server response: " + err.Error())
+		LogError("failed reading Time server response: " + err.Error())
 		os.Exit(10)
 	}
 
