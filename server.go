@@ -89,13 +89,9 @@ func (self *Server) handleConn(conn net.Conn) {
 
 	log.Println("info", "new connection from client "+conn.RemoteAddr().String())
 
-	buff := make([]byte, 4)
-
 	now := int32(time.Now().UTC().Unix())
 
-	binary.LittleEndian.PutUint32(buff, uint32(now))
-
-	_, err := conn.Write(buff)
+	err := binary.Write(conn, binary.BigEndian, int32(UnixToRfc(int64(now))))
 	if err != nil {
 		go self.sigHandleError(err)
 		log.Println(

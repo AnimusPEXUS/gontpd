@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/binary"
-	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -32,21 +31,16 @@ func main() {
 		fs_args := fs.Args()
 		len_args := len(fs_args)
 
-		if len_args < 1 {
-			fmt.Println("error", "too few arguments")
-			os.Exit(11)
-		}
-
 		if len_args > 2 {
 			fmt.Println("error", "too many arguments")
 			os.Exit(12)
 		}
 
-		if len_args >= 1 {
+		if len_args > 0 {
 			host = fs_args[0]
 		}
 
-		if len_args == 2 {
+		if len_args > 1 {
 			port, err = strconv.Atoi(fs_args[1])
 			if err != nil {
 				fmt.Println("error", "invalid value for port argument")
@@ -64,23 +58,19 @@ func main() {
 		os.Exit(10)
 	}
 
-	buff := make([]byte, 4)
+	var val uint32
 
-	count, err := conn.Read(buff)
-	if count != 4 {
-		err = errors.New("response too short: " + strconv.Itoa(count))
-	}
-
+	err = binary.Read(conn, binary.BigEndian, &val)
 	if err != nil {
 		log.Println("failed reading Time server response: " + err.Error())
 		os.Exit(10)
 	}
 
-	nint := binary.LittleEndian.Uint32(buff)
+	res := gontpd.UnixToRfc(int64(val))
 
-	fmt.Println(nint)
+	fmt.Println(res)
 
-	t := time.Unix(int64(nint), 0)
+	t := time.Unix(res, 0)
 	t = t.UTC()
 	fmt.Println(t.String())
 
