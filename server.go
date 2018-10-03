@@ -1,4 +1,4 @@
-package gontpd
+package gotimed
 
 import (
 	"encoding/binary"

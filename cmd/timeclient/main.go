@@ -9,13 +9,13 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/AnimusPEXUS/gontpd"
+	"github.com/AnimusPEXUS/gotimed"
 )
 
 func main() {
 	var (
-		host string = gontpd.NTPD_TCP_LISTENING_HOST
-		port int    = gontpd.NTPD_TCP_LISTENING_PORT
+		host string = gotimed.NTPD_TCP_LISTENING_HOST
+		port int    = gotimed.NTPD_TCP_LISTENING_PORT
 	)
 
 	{
@@ -65,7 +65,7 @@ func main() {
 		os.Exit(10)
 	}
 
-	res := gontpd.UnixToRfc(int64(val))
+	res := gotimed.UnixToRfc(int64(val))
 
 	fmt.Println(res)
 

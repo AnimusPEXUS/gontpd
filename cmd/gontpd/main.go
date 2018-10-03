@@ -6,12 +6,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/AnimusPEXUS/gontpd"
+	"github.com/AnimusPEXUS/gotimed"
 )
 
 func main() {
 
-	var port int = gontpd.NTPD_TCP_LISTENING_PORT
+	var port int = gotimed.NTPD_TCP_LISTENING_PORT
 
 	{
 		fs := flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
@@ -19,7 +19,7 @@ func main() {
 		fs.IntVar(
 			&port,
 			"p",
-			gontpd.NTPD_TCP_LISTENING_PORT,
+			gotimed.NTPD_TCP_LISTENING_PORT,
 			fmt.Sprintf("override default TCP listening port"),
 		)
 
@@ -31,7 +31,7 @@ func main() {
 
 	}
 
-	s, err := gontpd.NewServer(port)
+	s, err := gotimed.NewServer(port)
 	if err != nil {
 		log.Println("error", "Error instantiating Time server:", err)
 	}
