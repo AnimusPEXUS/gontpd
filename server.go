@@ -103,9 +103,9 @@ func (self *Server) handleConn(conn net.Conn) {
 				"can't close connection",
 				err,
 			)
+		} else {
+			log.Println("info", now_s, "connection closed")
 		}
-
-		log.Println("info", now_s, "connection closed")
 
 	}()
 
