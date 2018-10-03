@@ -118,6 +118,6 @@ func (self *Server) handleConn(conn net.Conn) {
 			err,
 		)
 	} else {
-		log.Println("info", now_s, "responce written")
+		log.Println("info", now_s, "response written")
 	}
 }

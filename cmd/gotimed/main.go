@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	var port int = gotimed.NTPD_TCP_LISTENING_PORT
+	var port int = gotimed.TIMED_TCP_LISTENING_PORT
 
 	{
 		fs := flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
@@ -19,7 +19,7 @@ func main() {
 		fs.IntVar(
 			&port,
 			"p",
-			gotimed.NTPD_TCP_LISTENING_PORT,
+			gotimed.TIMED_TCP_LISTENING_PORT,
 			fmt.Sprintf("override default TCP listening port"),
 		)
 

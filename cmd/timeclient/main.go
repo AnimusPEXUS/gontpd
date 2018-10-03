@@ -26,8 +26,8 @@ func LogError(txt string) {
 
 func main() {
 	var (
-		host string = gotimed.NTPD_TCP_LISTENING_HOST
-		port int    = gotimed.NTPD_TCP_LISTENING_PORT
+		host string = gotimed.TIMED_TCP_LISTENING_HOST
+		port int    = gotimed.TIMED_TCP_LISTENING_PORT
 	)
 
 	{

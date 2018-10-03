@@ -3,8 +3,8 @@ package gotimed
 import "time"
 
 const (
-	NTPD_TCP_LISTENING_HOST = "127.0.0.1"
-	NTPD_TCP_LISTENING_PORT = 37
+	TIMED_TCP_LISTENING_HOST = "127.0.0.1"
+	TIMED_TCP_LISTENING_PORT = 37
 )
 
 var RFC_UNIX_DIFF = time.Unix(0, 0).Sub(
