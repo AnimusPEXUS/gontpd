@@ -1,0 +1,6 @@
+package gontpd
+
+const (
+	NTPD_TCP_LISTENING_HOST = "127.0.0.1"
+	NTPD_TCP_LISTENING_PORT = 37
+)
