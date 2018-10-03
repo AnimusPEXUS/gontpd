@@ -65,7 +65,7 @@ func main() {
 		os.Exit(10)
 	}
 
-	res := gotimed.UnixToRfc(int64(val))
+	res := gotimed.UnixToRfc868(int64(val))
 
 	fmt.Println(res)
 

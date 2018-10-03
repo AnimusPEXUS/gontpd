@@ -13,8 +13,8 @@ func TestRfc868ToUnix(t *testing.T) {
 	}
 }
 
-func TestUnixToRfc(t *testing.T) {
-	r := gotimed.UnixToRfc(3747476803)
+func TestUnixToRfc868(t *testing.T) {
+	r := gotimed.UnixToRfc868(3747476803)
 	if r != 1538488003 {
 		t.Error("invalid time conversion")
 	}
