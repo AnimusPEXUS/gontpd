@@ -82,10 +82,6 @@ func (self *Server) Run() error {
 	}
 }
 
-func (self *Server) Start() {
-	go self.Run()
-}
-
 func (self *Server) handleConn(conn net.Conn) {
 
 	now := int32(time.Now().UTC().Unix())
