@@ -121,7 +121,7 @@ func (self *Server) handleConn(conn net.Conn) {
 			"can't write response data",
 			err,
 		)
+	} else {
+		log.Println("info", now_s, "responce written")
 	}
-
-	log.Println("info", now_s, "responce written")
 }
